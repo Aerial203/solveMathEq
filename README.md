@@ -1,0 +1,2 @@
+# solveMathEq
+solves math equation
