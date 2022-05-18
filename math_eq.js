@@ -67,6 +67,14 @@ function solve(step) {
 
 }
 
-function newEquation(equation, step, result) {
-    
+function replaceNextStep(equation, step, result) {
+    equation = equation.split(" ")
+    let j = 0
+    for (let i = 0; i < equation.length; i++) {
+        if (equation[i] === step[j] && equation[i+1] === step[j+1] && equation[i+2] === step[j+2]) {
+            equation[i] = result.toString()
+            break
+        }
+    } 
+    console.log(equation)
 }
