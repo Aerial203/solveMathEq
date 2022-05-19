@@ -30,10 +30,14 @@ function calculate(a, b, operation) {
 }
 
 export function parse(equation) {
-    const step = getNextStep(equation)
-    const result = solve(step)
-    const newEquation = replaceNextStep(equation, step, result)
-    // return parse(newEquation)
+    const _test = equation.includes("+") || equation.includes("/") || equation.includes("-") || equation.includes("*")
+    if (_test && equation.length > 1) {
+        const step = getNextStep(equation)
+        const result = solve(step)
+        const newEquation = replaceNextStep(equation, step, result)
+        return parse(newEquation)
+    } 
+    return equation    
 }
 
 function getNextStep(equation) {
@@ -85,5 +89,6 @@ function replaceNextStep(equation, step, result) {
     for(i = i+1; i < equation.length; i++) {
         equation[i] = equation[i+1]
     }
-    equation.pop() 
+    equation.pop()
+    return equation.join(" ")
 }

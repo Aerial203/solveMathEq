@@ -1,2 +1,2 @@
 # solveMathEq
-solves math equation
+solves math equation still need to solve for bracket equations
