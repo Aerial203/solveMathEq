@@ -80,15 +80,15 @@ function replaceNextStep(equation, step, result) {
             break
         }
     }
-    let temp = i
+    equation = _makeElementBackward(i, equation)
+    equation = _makeElementBackward(i, equation)
+    return equation.join(" ")
+}
+
+function _makeElementBackward(i, equation) {
     for (i = i + 1; i < equation.length; i++) {
         equation[i] = equation[i + 1]
     }
     equation.pop()
-    i = temp
-    for(i = i+1; i < equation.length; i++) {
-        equation[i] = equation[i+1]
-    }
-    equation.pop()
-    return equation.join(" ")
+    return equation
 }
