@@ -30,22 +30,22 @@ function calculate(a, b, operation) {
 }
 
 export function parse(equation) {
-    const step = getNextStep(equation) 
-    const result = solve(step) 
-    const newEquation = replaceNextStep(equation, step, result) 
+    const step = getNextStep(equation)
+    const result = solve(step)
+    const newEquation = replaceNextStep(equation, step, result)
     // return parse(newEquation)
 }
 
 function getNextStep(equation) {
     equation = equation.split(" ")
     for (let i = 0; i < equation.length; i++) {
-        if(equation[i] === operators.mul || equation[i] === operators.div) {
-            return [equation[i-1], equation[i], equation[i+1]]
+        if (equation[i] === operators.mul || equation[i] === operators.div) {
+            return [equation[i - 1], equation[i], equation[i + 1]]
         }
     }
     for (let i = 0; i < equation.length; i++) {
-        if(equation[i] === operators.add || equation[i] === operators.sub) {
-            return [equation[i-1], equation[i], equation[i+1]]
+        if (equation[i] === operators.add || equation[i] === operators.sub) {
+            return [equation[i - 1], equation[i], equation[i + 1]]
         }
     }
 }
@@ -69,12 +69,21 @@ function solve(step) {
 
 function replaceNextStep(equation, step, result) {
     equation = equation.split(" ")
-    let j = 0
-    for (let i = 0; i < equation.length; i++) {
-        if (equation[i] === step[j] && equation[i+1] === step[j+1] && equation[i+2] === step[j+2]) {
+    let j = 0, i
+    for (i = 0; i < equation.length; i++) {
+        if (equation[i] === step[j] && equation[i + 1] === step[j + 1] && equation[i + 2] === step[j + 2]) {
             equation[i] = result.toString()
             break
         }
-    } 
-    console.log(equation)
+    }
+    let temp = i
+    for (i = i + 1; i < equation.length; i++) {
+        equation[i] = equation[i + 1]
+    }
+    equation.pop()
+    i = temp
+    for(i = i+1; i < equation.length; i++) {
+        equation[i] = equation[i+1]
+    }
+    equation.pop() 
 }
