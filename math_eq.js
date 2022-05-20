@@ -42,6 +42,21 @@ export function parse(equation) {
 
 function getNextStep(equation) {
     equation = equation.split(" ")
+    if (equation.includes("(")) {
+        for(let i = equation.indexOf("(") + 1; i < equation.indexOf(")"); i++) {
+            if (equation[i] === operators.mul || equation[i] === operators.div) {
+                return [equation[i - 1], equation[i], equation[i + 1]]
+            }
+        }
+
+        for(let i = equation.indexOf("(") + 1; i < equation.indexOf(")"); i++) {
+            if (equation[i] === operators.add || equation[i] === operators.sub) {
+                return [equation[i - 1], equation[i], equation[i + 1]]
+            }
+        }
+        
+    } 
+
     for (let i = 0; i < equation.length; i++) {
         if (equation[i] === operators.mul || equation[i] === operators.div) {
             return [equation[i - 1], equation[i], equation[i + 1]]
@@ -53,6 +68,7 @@ function getNextStep(equation) {
         }
     }
 }
+
 
 function solve(step) {
     let [fOperand, operation, sOperand] = step
@@ -74,6 +90,12 @@ function solve(step) {
 function replaceNextStep(equation, step, result) {
     equation = equation.split(" ")
     let j = 0, i
+    if (equation.includes("(") && ((equation.indexOf(")") - equation.indexOf("(")) === 2)) {
+        equation = _makeElementBackward(equation.indexOf("(")-1, equation)
+        equation = _makeElementBackward(equation.indexOf(")")-1, equation)
+        return equation.join(" ")
+    }
+
     for (i = 0; i < equation.length; i++) {
         if (equation[i] === step[j] && equation[i + 1] === step[j + 1] && equation[i + 2] === step[j + 2]) {
             equation[i] = result.toString()
