@@ -31,6 +31,7 @@ function calculate(a, b, operation) {
 
 export function parse(equation) {
     const _test = equation.includes("+") || equation.includes("/") || equation.includes("-") || equation.includes("*")
+    console.log(equation)
     if (_test && equation.length > 1) {
         const step = getNextStep(equation)
         const result = solve(step)
@@ -42,6 +43,11 @@ export function parse(equation) {
 
 function getNextStep(equation) {
     equation = equation.split(" ")
+    if (((equation.indexOf(")") - equation.indexOf("(")) === 2)) {
+        let j = equation.indexOf("(")
+        equation = _makeElementBackward(j, equation)
+        equation = _makeElementBackward(j, equation)
+    }
     if (equation.includes("(")) {
         for(let i = equation.indexOf("(") + 1; i < equation.indexOf(")"); i++) {
             if (equation[i] === operators.mul || equation[i] === operators.div) {
