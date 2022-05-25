@@ -9,5 +9,5 @@ document.addEventListener("click", e => {
     if (input === "") return
     const result = parse(input)
     answerDiv.innerText = result
-    inputEq.innerText = ""
+    inputEq.value = ""
 })

@@ -1,7 +1,3 @@
-// 2 + 4 * 3 - 7
-// 2 + 12 - 7
-
-
 const operators = {
     mul: '*',
     div: "/",
@@ -33,6 +29,7 @@ export function parse(equation) {
     const _test = equation.includes("+") || equation.includes("/") || equation.includes("-") || equation.includes("*")
     console.log(equation)
     if (_test && equation.length > 1) {
+        if (equation[0] === "-") return equation
         const step = getNextStep(equation)
         const result = solve(step)
         const newEquation = replaceNextStep(equation, step, result)
