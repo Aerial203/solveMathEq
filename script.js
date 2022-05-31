@@ -1,13 +1,13 @@
 import { parse } from "./math_eq.js"
 
-const inputEq = document.querySelector(".equation")
-const answerDiv = document.querySelector(".solution")
+const form = document.querySelector("#equation-form")
+const equation = document.getElementById("equation")
+const result = document.getElementById("result") 
 
-document.addEventListener("click", e => {
-    if (!e.target.matches(".solve-btn")) return
-    const input = inputEq.value
-    if (input === "") return
-    const result = parse(input)
-    answerDiv.innerText = result
-    inputEq.value = ""
+
+form.addEventListener("submit", e => {
+    e.preventDefault()
+    const answer = parse(equation.value)
+    result.innerText = answer
+    equation.value = ""
 })

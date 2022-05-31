@@ -8,8 +8,10 @@
     <script src="script.js" type="module"></script>
 </head>
 <body>
-    <input type="text" class="equation">
-    <button type="submit" class="solve-btn">Solve</button>
-    <div class="solution"></div>
+    <form id="equation-form">
+        <input id="equation" autocomplete="off">
+        <button type="submit">Solve</button>
+    </form>
+    <div id="result"></div>
 </body>
 </html>
